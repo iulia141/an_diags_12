@@ -9,14 +9,14 @@ st.title('Калькулятор диаграмм направленности �
 an_type = st.radio("Choose your antenna type (выберите тип антенны):", ('Horn', 'Dipole', 'Patch'))
 if an_type == 'Horn':
     st.write('Введите ширину антенны "a" в метрах, высоту антенны "b" в метрах и длину волны "wl" в метрах:')
-    width = st.number_input('a', 0, None, float)
-    height = st.number_input('b', 0, None, float)
-    wave_length = st.number_input('l', 0, None, float)
+    width = st.number_input('a', 0.0, None, float)
+    height = st.number_input('b', 0.0, None, float)
+    wave_length = st.number_input('l', 0.0, None, float)
 
 if an_type == 'Dipole':
     st.write('Введите длину диполя "l" в метрах и длину волны "wl" в метрах:')
-    dipole_length = st.number_input('l', 0, None, float)
-    wave_length = st.number_input('wl', 0, None, float)
+    dipole_length = st.number_input('l', 0.0, None, float)
+    wave_length = st.number_input('wl', 0.0, None, float)
 
     theta = np.arange(0.01, 2 * np.pi, 0.01)
     fig, ax = plt.subplots(subplot_kw=dict(projection="polar"))
@@ -34,5 +34,5 @@ if an_type == 'Dipole':
 
 if an_type == 'Patch':
     st.write('Введите параметр "w" и длину волны "wl" в метрах:')
-    parameter = st.number_input('w', 0, None, float)
-    wave_length = st.number_input('wl', 0, None, float)
+    parameter = st.number_input('w', 0.0, None, float)
+    wave_length = st.number_input('wl', 0.0, None, float)
