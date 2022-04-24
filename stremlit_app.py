@@ -4,9 +4,9 @@ import numpy as np
 #import plotly.express as px
 from urllib.request import urlopen
 import json
-import matplotlib.pyplot as plt
 import matplotlib as mpl
 mpl.use('TkAgg')
+import matplotlib.pyplot as plt
 st.title('Калькулятор диаграмм направленности антенн')
 an_type = st.radio("Choose your antenna type (выберите тип антенны):", ('Horn', 'Dipole', 'Patch'))
 if an_type == 'Horn':
