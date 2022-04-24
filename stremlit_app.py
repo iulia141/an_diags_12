@@ -18,7 +18,7 @@ if an_type == 'Dipole':
     dipole_length = st.number_input('l', 0.0, None)
     wave_length = st.number_input('wl', 0.0, None)
 
-    theta = np.arange(0.01, 2 * np.pi, 0.01)
+    theta = np.arange(0.001, 2 * np.pi, 0.001)
     fig, ax = plt.subplots(subplot_kw=dict(projection="polar"))
 
     def dipole_diagram(wl, l):
