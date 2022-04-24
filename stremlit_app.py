@@ -22,7 +22,7 @@ if an_type == 'Dipole':
     fig, ax = plt.subplots(subplot_kw=dict(projection="polar"))
 
     def dipole_diagram(wl, l):
-        f = 20 * np.log(((np.cos(np.pi * (l / wl) * np.cos(theta)) - np.cos((wl / l) * np.pi)) / (np.sin(theta))) ** 2)
+        f = 20 * np.log(((np.cos(np.pi * (l / wl) * np.cos(theta)) - np.cos((l / wl) * np.pi)) / (np.sin(theta))) ** 2)
         return f
 
     ax.plot(theta, dipole_diagram(wave_length, dipole_length))
