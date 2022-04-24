@@ -5,6 +5,8 @@ import numpy as np
 from urllib.request import urlopen
 import json
 import matplotlib.pyplot as plt
+import matplotlib as mpl
+mpl.use('TkAgg')
 st.title('Калькулятор диаграмм направленности антенн')
 an_type = st.radio("Choose your antenna type (выберите тип антенны):", ('Horn', 'Dipole', 'Patch'))
 if an_type == 'Horn':
