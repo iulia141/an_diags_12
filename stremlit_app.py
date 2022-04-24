@@ -8,14 +8,15 @@ import matplotlib.pyplot as plt
 st.title('Калькулятор диаграмм направленности антенн')
 an_type = st.radio("Choose your antenna type (выберите тип антенны):", ('Horn', 'Dipole', 'Patch'))
 if an_type == 'Horn':
-    st.write('Введите ширину антенны "a", высоту антенны "b" и длину волны "wl":')
-    width = st.number_input('a', 0, None)
-    height = st.number_input('b', 0, None)
-    wave_length = st.number_input('l', 0, None)
+    st.write('Введите ширину антенны "a" в метрах, высоту антенны "b" в метрах и длину волны "wl" в метрах:')
+    width = st.number_input('a', 0, None, float)
+    height = st.number_input('b', 0, None, float)
+    wave_length = st.number_input('l', 0, None, float)
+
 if an_type == 'Dipole':
-    st.write('Введите длину диполя "l" и длину волны "wl":')
-    dipole_length = st.number_input('l', 0, None)
-    wave_length = st.number_input('wl', 0, None)
+    st.write('Введите длину диполя "l" в метрах и длину волны "wl" в метрах:')
+    dipole_length = st.number_input('l', 0, None, float)
+    wave_length = st.number_input('wl', 0, None, float)
 
     theta = np.arange(0.01, 2 * np.pi, 0.01)
     fig, ax = plt.subplots(subplot_kw=dict(projection="polar"))
@@ -32,10 +33,6 @@ if an_type == 'Dipole':
     st.pyplot(fig)
 
 if an_type == 'Patch':
-    st.write('Введите параметр "w" и длину волны "wl":')
-    parameter = st.number_input('w', 0, None)
-    wave_length = st.number_input('wl', 0, None)
-
-if an_type == 'Dipole' or 'Patch':
-    theta = np.arange(0.01, 2 * np.pi, 0.01)
-    fig, ax = plt.subplots(subplot_kw=dict(projection="polar"))
+    st.write('Введите параметр "w" и длину волны "wl" в метрах:')
+    parameter = st.number_input('w', 0, None, float)
+    wave_length = st.number_input('wl', 0, None, float)
