@@ -23,13 +23,12 @@ if ln_type == 'Русский':
         theta = np.arange(0.001, 2 * np.pi, 0.001)
         fig, ax = plt.subplots(subplot_kw=dict(projection="polar"))
 
-        def dipole_diagram(wl, l):
-            f = 20 * np.log(
-                ((np.cos(np.pi * (l / wl) * np.cos(theta)) - np.cos((l / wl) * np.pi)) / (np.sin(theta))) ** 2)
-            return f
+        f = (np.cos(np.pi * (dipole_length / wave_length) * np.cos(theta)) - np.cos(
+            (dipole_length / wave_length) * np.pi)) / (np.sin(theta))
+        norm = f.max()
+        dipole_diagram = 20 * np.log((f / norm) ** 2)
 
-
-        ax.plot(theta, dipole_diagram(wave_length, dipole_length))
+        ax.plot(theta, dipole_diagram)
         ax.set_theta_zero_location('N')
         ax.set_rlabel_position(-90)
         plt.thetagrids(range(0, 360, 30))
@@ -56,14 +55,12 @@ if ln_type == 'English':
         theta = np.arange(0.001, 2 * np.pi, 0.001)
         fig, ax = plt.subplots(subplot_kw=dict(projection="polar"))
 
+        f = (np.cos(np.pi * (dipole_length / wave_length) * np.cos(theta)) - np.cos(
+            (dipole_length / wave_length) * np.pi)) / (np.sin(theta))
+        norm = f.max()
+        dipole_diagram = 20 * np.log((f / norm) ** 2)
 
-        def dipole_diagram(wl, l):
-            f = 20 * np.log(
-                ((np.cos(np.pi * (l / wl) * np.cos(theta)) - np.cos((l / wl) * np.pi)) / (np.sin(theta))) ** 2)
-            return f
-
-
-        ax.plot(theta, dipole_diagram(wave_length, dipole_length))
+        ax.plot(theta, dipole_diagram)
         ax.set_theta_zero_location('N')
         ax.set_rlabel_position(-90)
         plt.thetagrids(range(0, 360, 30))
