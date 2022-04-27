@@ -8,14 +8,14 @@ import matplotlib.pyplot as plt
 st.title('Antenna radiation pattern calculator (Калькулятор диаграмм направленности антенн)')
 ln_type = st.radio("Choose your language (Выберите свой язык):", ('English', 'Русский'))
 if ln_type == 'Русский':
-    an_type = st.radio("Выберите тип антенны:", ('Horn', 'Dipole', 'Patch'))
-    if an_type == 'Horn':
+    an_type = st.radio("Выберите тип антенны:", ('Рупорная антенна', 'Дипольная антенна', 'Патч-антенна'))
+    if an_type == 'Рупорная антенна':
         st.write('Введите ширину антенны "a" в метрах, высоту антенны "b" в метрах и длину волны "wl" в метрах:')
         width = st.number_input('a', 0.0, None)
         height = st.number_input('b', 0.0, None)
         wave_length = st.number_input('l', 0.0, None)
 
-    if an_type == 'Dipole':
+    if an_type == 'Дипольная антенна':
 
         st.write('Введите длину диполя "l" в метрах и длину волны "wl" в метрах:')
         dipole_length = st.number_input('l', 0.0, None)
@@ -38,7 +38,7 @@ if ln_type == 'Русский':
         except:
             st.write('Неверно введены данные')
 
-    if an_type == 'Patch':
+    if an_type == 'Патч-антенна':
         st.write('Введите параметр "w" и длину волны "wl" в метрах:')
         parameter = st.number_input('w', 0.0, None)
         wave_length = st.number_input('wl', 0.0, None)
