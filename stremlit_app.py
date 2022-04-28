@@ -20,7 +20,7 @@ if ln_type == 'Русский':
         st.write('Введите длину диполя "l" в метрах и длину волны "wl" в метрах:')
         dipole_length = st.number_input('l', 0.0, None)
         wave_length = st.number_input('wl', 0.0, None)
-        try:
+        if dipole_length > 0 and wave_length > 0:
             theta = np.arange(0.001, 2 * np.pi, 0.001)
             fig, ax = plt.subplots(subplot_kw=dict(projection="polar"))
 
@@ -35,7 +35,7 @@ if ln_type == 'Русский':
             plt.thetagrids(range(0, 360, 30))
 
             st.pyplot(fig)
-        except:
+        else:
             st.write('Неверно введены данные')
 
     if an_type == 'Патч-антенна':
@@ -54,7 +54,7 @@ if ln_type == 'English':
         st.write('Enter dipole length "l" in meters and wave length "wl" in meters:')
         dipole_length = st.number_input('l', 0.0, None)
         wave_length = st.number_input('wl', 0.0, None)
-        try:
+        if dipole_length > 0 and wave_length > 0:
             theta = np.arange(0.001, 2 * np.pi, 0.001)
             fig, ax = plt.subplots(subplot_kw=dict(projection="polar"))
 
@@ -69,7 +69,7 @@ if ln_type == 'English':
             plt.thetagrids(range(0, 360, 30))
 
             st.pyplot(fig)
-        except:
+        else:
             st.write('Incorrect data entered')
     if an_type == 'Patch':
         st.write('Enter parameter "w" and wave length "wl" in meters:')
