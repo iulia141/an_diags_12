@@ -1,12 +1,11 @@
-import math
-
+#import math
 import streamlit as st
-import pandas as pd
+#import pandas as pd
 import numpy as np
 import sympy as sym
 #import plotly.express as px
-from urllib.request import urlopen
-import json
+#from urllib.request import urlopen
+#import json
 import matplotlib.pyplot as plt
 st.title('Antenna radiation pattern calculator (Калькулятор диаграмм направленности антенн)')
 ln_type = st.radio("Choose your language (Выберите свой язык):", ('English', 'Русский'))
@@ -39,15 +38,15 @@ if ln_type == 'Русский':
 
             st.pyplot(fig)
 
-            x = sym.Symbol("x")
+            x = sym.Symbol('x')
             C = 0.5772
             Cikl = sym.integrate(np.cos(x)/x, (x, 0, 2*np.pi*dipole_length/wave_length))
             Ci2kl = sym.integrate(np.cos(x)/x, (x, 0, 4*np.pi*dipole_length/wave_length))
             Sikl = sym.integrate(np.sin(x)/x, (x, 0, 2*np.pi*dipole_length/wave_length))
             Si2kl = sym.integrate(np.sin(x)/x, (x, 0, 4*np.pi*dipole_length/wave_length))
-            Q = (C + np.ln(2*np.pi*dipole_length/wave_length) - Cikl + 0.5*np.sin(2*np.pi*dipole_length/wave_length) *
+            Q = (C + np.log(2*np.pi*dipole_length/wave_length) - Cikl + 0.5*np.sin(2*np.pi*dipole_length/wave_length) *
                  (Si2kl - 2*Sikl) + 0.5*np.cos(2*np.pi*dipole_length/wave_length) *
-                 (C + np.ln(np.pi*dipole_length/wave_length) + Ci2kl - 2*Cikl))
+                 (C + np.log(np.pi*dipole_length/wave_length) + Ci2kl - 2*Cikl))
             D = 2*f.max() / Q
             st.write('Направленность антенны равна "D"')
         else:
