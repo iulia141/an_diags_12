@@ -25,15 +25,16 @@ if ln_type == 'Русский':
             st.write('Диаграмма направленности для рупорной антенны')
 
             theta = np.arange(-np.pi / 2, np.pi / 2, 0.0005)
+            fig, ax = plt.subplots()
             fE = 20 * np.log(
                 ((1 + np.cos(theta)) / 2) * ((np.sin(b * k * np.sin(theta))) / (k * b * np.sin(theta) / 2)))
             fH = 20*np.log(np.pi**2/8*(1+np.cos(theta))*
                            (np.cos(k*a/2*np.sin(theta)))/(np.pi**2/4-(k*a/2*np.sin(theta))**2))
 
             plt.axis([-np.pi / 2, np.pi / 2, -80, 10])
-            plt.plot(theta, fE)
-            plt.plot(theta, fH)
-            plt.show()
+            ax.plot(theta, fE)
+            ax.plot(theta, fH)
+            st.pypolt(fig)
 
         else:
             st.write('Неверно введены данные')
