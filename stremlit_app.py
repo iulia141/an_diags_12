@@ -22,6 +22,7 @@ if ln_type == 'Русский':
             c = 299792458
             l = c / frc
             k = 2 * np.pi / l
+            st.write('Диаграмма направленности для рупорной антенны')
 
             theta = np.arange(-np.pi / 2, np.pi / 2, 0.0005)
             fE = 20 * np.log(
@@ -30,10 +31,10 @@ if ln_type == 'Русский':
                            (np.cos(k*a/2*np.sin(theta)))/(np.pi**2/4-(k*a/2*np.sin(theta))**2))
 
             plt.axis([-np.pi / 2, np.pi / 2, -80, 10])
-            plt.title('Диаграмма направленности рупорной антенны')
             plt.plot(theta, fE)
             plt.plot(theta, fH)
             plt.show()
+
         else:
             st.write('Неверно введены данные')
 
@@ -71,6 +72,7 @@ if ln_type == 'Русский':
                  (Si2kl - 2 * Sikl) + 0.5 * np.cos(2 * np.pi * dipole_length / wave_length) *
                  (C + np.log(np.pi * dipole_length / wave_length) + Ci2kl - 2 * Cikl))
             D = 2*f.max() / Q
+            D = float(D)
             D = str(D)
             st.write("Направленность антенны равна " + D)
         else:
@@ -121,6 +123,7 @@ if ln_type == 'English':
                  (Si2kl - 2 * Sikl) + 0.5 * np.cos(2 * np.pi * dipole_length / wave_length) *
                  (C + np.log(np.pi * dipole_length / wave_length) + Ci2kl - 2 * Cikl))
             D = 2 * f.max() / Q
+            D = float(D)
             D = str(D)
             st.write("Antenna directivity is equal " + D)
         else:
