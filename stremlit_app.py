@@ -49,6 +49,7 @@ if ln_type == 'Русский':
                  (Si2kl - 2 * Sikl) + 0.5 * np.cos(2 * np.pi * dipole_length / wave_length) *
                  (C + np.log(np.pi * dipole_length / wave_length) + Ci2kl - 2 * Cikl))
             D = 2*f.max() / Q
+            D = str(D)
             st.write("Направленность антенны равна " + D)
         else:
             st.write('Неверно введены данные')
