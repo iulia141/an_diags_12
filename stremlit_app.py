@@ -12,15 +12,11 @@ ln_type = st.radio("Choose your language (Выберите свой язык):",
 if ln_type == 'Русский':
     an_type = st.radio("Выберите тип антенны:", ('Рупорная антенна', 'Дипольная антенна', 'Патч-антенна'))
     if an_type == 'Рупорная антенна':
-        st.write('Введите ширину антенны "a" в метрах, высоту антенны "b" в метрах и длину волны "wl" в метрах:')
-        width = st.number_input('a', 0.0, None)
-        height = st.number_input('b', 0.0, None)
-        wave_length = st.number_input('l', 0.0, None)
-        if width > 0 and height > 0 and wave_length > 0:
-
-            a = float(input('Введите ширину антенны:'))
-            b = float(input('Теперь длину:'))
-            frc = float(input('И частоту (МГц): ')) * 1000000
+        st.write('Введите ширину антенны "a" в метрах, высоту антенны "b" в метрах и частоту волны "frc" в мегаагерцах:')
+        a = float(input('Введите ширину антенны:'))
+        b = float(input('Теперь длину:'))
+        frc = float(input('И частоту (МГц): ')) * 1000000
+        if a > 0 and b > 0 and frc > 0:
 
             c = 299792458
             l = c / frc
