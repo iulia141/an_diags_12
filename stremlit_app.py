@@ -1,11 +1,11 @@
-#import math
+import math
 import streamlit as st
-#import pandas as pd
+import pandas as pd
 import numpy as np
 import sympy as sym
 #import plotly.express as px
 #from urllib.request import urlopen
-#import json
+import json
 import matplotlib.pyplot as plt
 st.title('Antenna radiation pattern calculator (Калькулятор диаграмм направленности антенн)')
 ln_type = st.radio("Choose your language (Выберите свой язык):", ('English', 'Русский'))
@@ -16,6 +16,29 @@ if ln_type == 'Русский':
         width = st.number_input('a', 0.0, None)
         height = st.number_input('b', 0.0, None)
         wave_length = st.number_input('l', 0.0, None)
+        if width > 0 and height > 0 and wave_length > 0:
+
+            a = float(input('Введите ширину антенны:'))
+            b = float(input('Теперь длину:'))
+            frc = float(input('И частоту (МГц): ')) * 1000000
+
+            c = 299792458
+            l = c / frc
+            k = 2 * np.pi / l
+
+            theta = np.arange(-np.pi / 2, np.pi / 2, 0.0005)
+            fE = 20 * np.log(
+                ((1 + np.cos(theta)) / 2) * ((np.sin(b * k * np.sin(theta))) / (k * b * np.sin(theta) / 2)))
+            fH = 20*np.log(np.pi**2/8*(1+np.cos(theta))*
+                           (np.cos(k*a/2*np.sin(theta)))/(np.pi**2/4-(k*a/2*np.sin(theta))**2))
+
+            plt.axis([-np.pi / 2, np.pi / 2, -80, 10])
+            plt.title('Диаграмма направленности рупорной антенны')
+            plt.plot(theta, fE)
+            plt.plot(theta, fH)
+            plt.show()
+        else:
+            st.write('Неверно введены данные')
 
     if an_type == 'Дипольная антенна':
 
@@ -25,6 +48,8 @@ if ln_type == 'Русский':
         if dipole_length > 0 and wave_length > 0:
             theta = np.arange(0.001, 2 * np.pi, 0.001)
             fig, ax = plt.subplots(subplot_kw=dict(projection="polar"))
+
+            st.write('Диаграмма направленности для дипольной антенны')
 
             f = (np.cos(np.pi * (dipole_length / wave_length) * np.cos(theta)) - np.cos(
                 (dipole_length / wave_length) * np.pi)) / (np.sin(theta))
@@ -74,6 +99,8 @@ if ln_type == 'English':
             theta = np.arange(0.001, 2 * np.pi, 0.001)
             fig, ax = plt.subplots(subplot_kw=dict(projection="polar"))
 
+            st.write('Radiation pattern for dipole antenna')
+
             f = (np.cos(np.pi * (dipole_length / wave_length) * np.cos(theta)) - np.cos(
                 (dipole_length / wave_length) * np.pi)) / (np.sin(theta))
             norm = f.max()
@@ -85,6 +112,20 @@ if ln_type == 'English':
             plt.thetagrids(range(0, 360, 30))
 
             st.pyplot(fig)
+
+            x = sym.Symbol('x')
+            C = 0.5772
+            Cikl = sym.integrate(sym.cos(x) / x, (x, 0, 2 * np.pi * dipole_length / wave_length))
+            Ci2kl = sym.integrate(sym.cos(x) / x, (x, 0, 4 * np.pi * dipole_length / wave_length))
+            Sikl = sym.integrate(sym.sin(x) / x, (x, 0, 2 * np.pi * dipole_length / wave_length))
+            Si2kl = sym.integrate(sym.sin(x) / x, (x, 0, 4 * np.pi * dipole_length / wave_length))
+            Q = (C + np.log(2 * np.pi * dipole_length / wave_length) - Cikl + 0.5 *
+                 np.sin(2 * np.pi * dipole_length / wave_length) *
+                 (Si2kl - 2 * Sikl) + 0.5 * np.cos(2 * np.pi * dipole_length / wave_length) *
+                 (C + np.log(np.pi * dipole_length / wave_length) + Ci2kl - 2 * Cikl))
+            D = 2 * f.max() / Q
+            D = str(D)
+            st.write("Antenna directivity is equal " + D)
         else:
             st.write('Incorrect data entered')
     if an_type == 'Patch':
