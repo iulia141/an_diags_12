@@ -40,13 +40,14 @@ if ln_type == 'Русский':
 
             x = sym.Symbol('x')
             C = 0.5772
-            Cikl = sym.integrate(np.cos(x)/x, (x, 0, 2*np.pi*dipole_length/wave_length))
-            Ci2kl = sym.integrate(np.cos(x)/x, (x, 0, 4*np.pi*dipole_length/wave_length))
-            Sikl = sym.integrate(np.sin(x)/x, (x, 0, 2*np.pi*dipole_length/wave_length))
-            Si2kl = sym.integrate(np.sin(x)/x, (x, 0, 4*np.pi*dipole_length/wave_length))
-            Q = (C + np.log(2*np.pi*dipole_length/wave_length) - Cikl + 0.5*np.sin(2*np.pi*dipole_length/wave_length) *
-                 (Si2kl - 2*Sikl) + 0.5*np.cos(2*np.pi*dipole_length/wave_length) *
-                 (C + np.log(np.pi*dipole_length/wave_length) + Ci2kl - 2*Cikl))
+            Cikl = sym.integrate(sym.cos(x)/x, (x, 0, 2*np.pi*dipole_length/wave_length))
+            Ci2kl = sym.integrate(sym.cos(x)/x, (x, 0, 4*np.pi*dipole_length/wave_length))
+            Sikl = sym.integrate(sym.sin(x)/x, (x, 0, 2*np.pi*dipole_length/wave_length))
+            Si2kl = sym.integrate(sym.sin(x)/x, (x, 0, 4*np.pi*dipole_length/wave_length))
+            Q = (C + np.log(2 * np.pi * dipole_length / wave_length) - Cikl + 0.5 *
+                 np.sin(2 * np.pi * dipole_length / wave_length) *
+                 (Si2kl - 2 * Sikl) + 0.5 * np.cos(2 * np.pi * dipole_length / wave_length) *
+                 (C + np.log(np.pi * dipole_length / wave_length) + Ci2kl - 2 * Cikl))
             D = 2*f.max() / Q
             st.write('Направленность антенны равна "D"')
         else:
