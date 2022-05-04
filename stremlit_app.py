@@ -34,7 +34,7 @@ if ln_type == 'Русский':
             plt.axis([-np.pi / 2, np.pi / 2, -80, 10])
             ax.plot(theta, fE)
             ax.plot(theta, fH)
-            st.pypolt(fig)
+            st.pyplot(fig)
 
         else:
             st.write('Неверно введены данные')
