@@ -86,10 +86,34 @@ if ln_type == 'Русский':
 if ln_type == 'English':
     an_type = st.radio("Choose your antenna type:", ('Horn', 'Dipole', 'Patch'))
     if an_type == 'Horn':
-        st.write('Enter antenna width "a" in meters, antenna height "b" in meters and wave length "wl" in meters:')
-        width = st.number_input('a', 0.0, None)
-        height = st.number_input('b', 0.0, None)
-        wave_length = st.number_input('l', 0.0, None)
+        st.write('Enter antenna width "a" in meters, antenna height "b" in meters '
+                 'and wave frequency "frc" in megahertz:')
+
+        a = st.number_input('a', 0.0, None)
+        b = st.number_input('b', 0.0, None)
+        frc = st.number_input('l', 0.0, None)
+        frc = frc * 1000000
+        if a > 0 and b > 0 and frc > 0:
+
+            c = 299792458
+            l = c / frc
+            k = 2 * np.pi / l
+            st.write('Диаграмма направленности для рупорной антенны')
+
+            theta = np.arange(-np.pi / 2, np.pi / 2, 0.0005)
+            fig, ax = plt.subplots()
+            fE = 20 * np.log(
+                ((1 + np.cos(theta)) / 2) * ((np.sin(b * k * np.sin(theta))) / (k * b * np.sin(theta) / 2)))
+            fH = 20 * np.log(np.pi ** 2 / 8 * (1 + np.cos(theta)) *
+                             (np.cos(k * a / 2 * np.sin(theta))) / (np.pi ** 2 / 4 - (k * a / 2 * np.sin(theta)) ** 2))
+
+            plt.axis([-np.pi / 2, np.pi / 2, -80, 10])
+            ax.plot(theta, fE)
+            ax.plot(theta, fH)
+            st.pyplot(fig)
+
+        else:
+            st.write('Неверно введены данные')
 
     if an_type == 'Dipole':
         st.write('Enter dipole length "l" in meters and wave length "wl" in meters:')
