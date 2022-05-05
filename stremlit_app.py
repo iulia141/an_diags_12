@@ -9,13 +9,15 @@ import json
 import matplotlib.pyplot as plt
 st.title('Antenna radiation pattern calculator (Калькулятор диаграмм направленности антенн)')
 ln_type = st.radio("Choose your language (Выберите свой язык):", ('English', 'Русский'))
+
 if ln_type == 'Русский':
     an_type = st.radio("Выберите тип антенны:", ('Рупорная антенна', 'Дипольная антенна', 'Патч-антенна'))
+
     if an_type == 'Рупорная антенна':
         st.write('Введите ширину антенны "a" в метрах, высоту антенны "b" в метрах и частоту волны "frc" в мегагерцах:')
         a = st.number_input('a', 0.0, None)
         b = st.number_input('b', 0.0, None)
-        frc = st.number_input('l', 0.0, None)
+        frc = st.number_input('frc', 0.0, None)
         frc = frc * 1000000
         if a > 0 and b > 0 and frc > 0:
 
@@ -40,7 +42,6 @@ if ln_type == 'Русский':
             st.write('Неверно введены данные')
 
     if an_type == 'Дипольная антенна':
-
         st.write('Введите длину диполя "l" в метрах и длину волны "wl" в метрах:')
         dipole_length = st.number_input('l', 0.0, None)
         wave_length = st.number_input('wl', 0.0, None)
@@ -83,15 +84,21 @@ if ln_type == 'Русский':
         st.write('Введите параметр "w" и длину волны "wl" в метрах:')
         parameter = st.number_input('w', 0.0, None)
         wave_length = st.number_input('wl', 0.0, None)
+        if wave_length > 0:
+            pass
+        else:
+            st.write('Неверно введены данные')
+
 if ln_type == 'English':
     an_type = st.radio("Choose your antenna type:", ('Horn', 'Dipole', 'Patch'))
+
     if an_type == 'Horn':
         st.write('Enter antenna width "a" in meters, antenna height "b" in meters '
                  'and wave frequency "frc" in megahertz:')
 
         a = st.number_input('a', 0.0, None)
         b = st.number_input('b', 0.0, None)
-        frc = st.number_input('l', 0.0, None)
+        frc = st.number_input('frc', 0.0, None)
         frc = frc * 1000000
         if a > 0 and b > 0 and frc > 0:
 
@@ -153,7 +160,12 @@ if ln_type == 'English':
             st.write("Antenna directivity is equal " + D)
         else:
             st.write('Incorrect data entered')
+
     if an_type == 'Patch':
         st.write('Enter parameter "w" and wave length "wl" in meters:')
         parameter = st.number_input('w', 0.0, None)
         wave_length = st.number_input('wl', 0.0, None)
+        if wave_length > 0:
+            pass
+        else:
+            st.write('Incorrect data entered')
