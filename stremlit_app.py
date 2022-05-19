@@ -38,6 +38,11 @@ if ln_type == 'Русский':
             ax.plot(theta, fH)
             st.pyplot(fig)
 
+            st.write('Введите высоту рупора антенны "b1" в метрах:')
+            b1 = st.number_input('b1', 0.0, None)
+            De = 32 * a * b1 / np.pi / l / l
+            st.write("Направленность антенны равна " + De)
+
         else:
             st.write('Неверно введены данные')
 
@@ -73,7 +78,7 @@ if ln_type == 'Русский':
                  np.sin(2 * np.pi * dipole_length / wave_length) *
                  (Si2kl - 2 * Sikl) + 0.5 * np.cos(2 * np.pi * dipole_length / wave_length) *
                  (C + np.log(np.pi * dipole_length / wave_length) + Ci2kl - 2 * Cikl))
-            D = 2*f.max() / Q
+            D = 2 * norm / Q
             D = float(D)
             D = str(D)
             st.write("Направленность антенны равна " + D)
@@ -105,7 +110,7 @@ if ln_type == 'English':
             c = 299792458
             l = c / frc
             k = 2 * np.pi / l
-            st.write('Диаграмма направленности для рупорной антенны')
+            st.write('Radiation pattern for horn antenna')
 
             theta = np.arange(-np.pi / 2, np.pi / 2, 0.0005)
             fig, ax = plt.subplots()
@@ -119,8 +124,13 @@ if ln_type == 'English':
             ax.plot(theta, fH)
             st.pyplot(fig)
 
+            st.write('Enter antenna horn height "b1" in meters:')
+            b1 = st.number_input('b1', 0.0, None)
+            De = 32*a*b1/np.pi/l/l
+            st.write("Antenna directivity is equal " + De)
+
         else:
-            st.write('Неверно введены данные')
+            st.write('Incorrect data entered')
 
     if an_type == 'Dipole':
         st.write('Enter dipole length "l" in meters and wave length "wl" in meters:')
