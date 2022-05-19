@@ -41,6 +41,7 @@ if ln_type == 'Русский':
             st.write('Введите высоту рупора антенны "b1" в метрах:')
             b1 = st.number_input('b1', 0.0, None)
             De = 32 * a * b1 / np.pi / l / l
+            De = str(De)
             st.write("Направленность антенны равна " + De)
 
         else:
@@ -127,6 +128,7 @@ if ln_type == 'English':
             st.write('Enter antenna horn height "b1" in meters:')
             b1 = st.number_input('b1', 0.0, None)
             De = 32*a*b1/np.pi/l/l
+            De = str(De)
             st.write("Antenna directivity is equal " + De)
 
         else:
