@@ -71,7 +71,6 @@ if ln_type == 'Русский':
             ax.set_theta_zero_location('N')
             ax.set_rlabel_position(-90)
             plt.thetagrids(range(0, 360, 30))
-            ax.set_title()
 
             st.pyplot(fig)
 
@@ -85,7 +84,7 @@ if ln_type == 'Русский':
                  np.sin(2 * np.pi * dipole_length / wave_length) *
                  (Si2kl - 2 * Sikl) + 0.5 * np.cos(2 * np.pi * dipole_length / wave_length) *
                  (C + np.log(np.pi * dipole_length / wave_length) + Ci2kl - 2 * Cikl))
-            D = 2 * norm / Q
+            D = 2 * f.max() / Q
             D = float(D)
             D = str(D)
             st.write("Направленность антенны равна " + D)
@@ -172,7 +171,7 @@ if ln_type == 'English':
             f = (np.cos(np.pi * (dipole_length / wave_length) * np.cos(theta)) - np.cos(
                 (dipole_length / wave_length) * np.pi)) / (np.sin(theta))
             norm = f.max()
-            dipole_diagram = 20 * np.log((f / norm) ** 2)
+            dipole_diagram = 20 * np.log10((f / norm) ** 2)
 
             ax.plot(theta, dipole_diagram)
             ax.set_theta_zero_location('N')
