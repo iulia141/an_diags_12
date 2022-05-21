@@ -96,7 +96,7 @@ if ln_type == 'Русский':
         st.write('Введите параметр "w" и длину волны "wl" в метрах:')
         parameter = st.number_input('w, м', 0.0, None)
         wave_length = st.number_input('wl, м', 0.0, None)
-        if wave_length > 0:
+        if wave_length > 0 and parameter > 0:
             st.write('Диаграмма направленности для патч-антенны')
             fig, ax = plt.subplots(subplot_kw=dict(projection="polar"))
             k = 2 * np.pi / wave_length
@@ -204,7 +204,7 @@ if ln_type == 'English':
         parameter = st.number_input('w, m', 0.0, None)
         wave_length = st.number_input('wl, m', 0.0, None)
 
-        if wave_length > 0:
+        if wave_length > 0 and parameter > 0:
             st.write('Radiation pattern for patch-antenna')
             fig, ax = plt.subplots(subplot_kw=dict(projection="polar"))
             k = 2 * np.pi / wave_length
