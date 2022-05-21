@@ -97,6 +97,7 @@ if ln_type == 'Русский':
         parameter = st.number_input('w, м', 0.0, None)
         wave_length = st.number_input('wl, м', 0.0, None)
         if wave_length > 0:
+            st.write('Диаграмма направленности для патч-антенны')
             fig, ax = plt.subplots(subplot_kw=dict(projection="polar"))
             k = 2 * np.pi / wave_length
             theta = np.arange(0, np.pi, np.pi / 100)
@@ -204,6 +205,7 @@ if ln_type == 'English':
         wave_length = st.number_input('wl, m', 0.0, None)
 
         if wave_length > 0:
+            st.write('Radiation pattern for patch-antenna')
             fig, ax = plt.subplots(subplot_kw=dict(projection="polar"))
             k = 2 * np.pi / wave_length
             theta = np.arange(0, np.pi, np.pi / 100)
