@@ -105,6 +105,14 @@ if ln_type == 'Русский':
             patch_diagram = 20 * np.log10(f / norm)
             ax.plot(theta, patch_diagram)
             st.pyplot(fig)
+
+            X = k * parameter
+            x = sym.Symbol('x')
+            SiX = sym.integrate(sym.sin(x) / x, (x, 0, X))
+            I1 = -2 + sym.cos(X) + X * SiX + sym.sin(X) / X
+            D0 = ((2 * np.pi * parameter / wave_length) ^ 2) / I1
+            D0 = str(D0)
+            st.write("Направленность антенны равна " + D0)
         else:
             st.write('Неверно введены данные')
 
@@ -204,6 +212,14 @@ if ln_type == 'English':
             patch_diagram = 20 * np.log10(f / norm)
             ax.plot(theta, patch_diagram)
             st.pyplot(fig)
+
+            X = k*parameter
+            x = sym.Symbol('x')
+            SiX = sym.integrate(sym.sin(x) / x, (x, 0, X))
+            I1 = -2 + sym.cos(X) + X*SiX + sym.sin(X)/X
+            D0 = ((2*np.pi*parameter/wave_length) ^ 2) / I1
+            D0 = str(D0)
+            st.write("Antenna directivity is equal " + D0)
 
         else:
             st.write('Incorrect data entered')
