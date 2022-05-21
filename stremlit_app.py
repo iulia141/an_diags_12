@@ -153,7 +153,7 @@ if ln_type == 'English':
             b1 = st.number_input('b1, m', 0.0, None)
             De = 32 * a * b1 / np.pi / l / l
             De = str(De)
-            st.write("Antenna directivity is equal " + De)
+            st.write("Antenna directivity is equal to " + De)
 
         else:
             st.write('Incorrect data entered')
@@ -194,7 +194,7 @@ if ln_type == 'English':
             D = 2 * f.max() / Q
             D = float(D)
             D = str(D)
-            st.write("Antenna directivity is equal " + D)
+            st.write("Antenna directivity is equal to " + D)
 
         else:
             st.write('Incorrect data entered')
@@ -221,7 +221,7 @@ if ln_type == 'English':
             I1 = -2 + sym.cos(X) + X*SiX + sym.sin(X)/X
             D0 = ((2*np.pi*parameter/wave_length) ** 2) / I1
             D0 = str(D0)
-            st.write("Antenna directivity is equal " + D0)
+            st.write("Antenna directivity is equal to " + D0)
 
         else:
             st.write('Incorrect data entered')
