@@ -110,7 +110,7 @@ if ln_type == 'Русский':
             x = sym.Symbol('x')
             SiX = sym.integrate(sym.sin(x) / x, (x, 0, X))
             I1 = -2 + sym.cos(X) + X * SiX + sym.sin(X) / X
-            D0 = ((2 * np.pi * parameter / wave_length) ^ 2) / I1
+            D0 = ((2 * np.pi * parameter / wave_length) ** 2) / I1
             D0 = str(D0)
             st.write("Направленность антенны равна " + D0)
         else:
@@ -217,7 +217,7 @@ if ln_type == 'English':
             x = sym.Symbol('x')
             SiX = sym.integrate(sym.sin(x) / x, (x, 0, X))
             I1 = -2 + sym.cos(X) + X*SiX + sym.sin(X)/X
-            D0 = ((2*np.pi*parameter/wave_length) ^ 2) / I1
+            D0 = ((2*np.pi*parameter/wave_length) ** 2) / I1
             D0 = str(D0)
             st.write("Antenna directivity is equal " + D0)
 
