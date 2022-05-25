@@ -10,10 +10,6 @@ import matplotlib.pyplot as plt
 
 st.title('Antenna radiation pattern calculator (Калькулятор диаграмм направленности антенн)')
 ln_type = st.radio("Choose your language (Выберите свой язык):", ('English', 'Русский'))
-if ln_type == 'English':
-    st.write('Calculator is programmed by students Timankova Julia, Zhakharov Ivan and Necliudov Egor.')
-else:
-    st.write('Калькулятор написан студентами Тиманкова Юлия, Захаров Иван и Неклюдов Егор.')
 if ln_type == 'Русский':
     an_type = st.radio("Выберите тип антенны:", ('Рупорная антенна', 'Дипольная антенна', 'Патч-антенна'))
 
@@ -227,3 +223,8 @@ if ln_type == 'English':
 
         else:
             st.write('Incorrect data entered')
+            
+if ln_type == 'English':
+    st.write('Calculator is programmed by students Timankova Julia, Zhakharov Ivan and Necliudov Egor.')
+else:
+    st.write('Калькулятор написан студентами Тиманкова Юлия, Захаров Иван и Неклюдов Егор.')
