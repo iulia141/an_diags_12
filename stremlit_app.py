@@ -149,7 +149,7 @@ if an_type == 'Рупорная антенна' or an_type == 'Horn':
     frc = col1.number_input('frc, MHz', 0.0, None)
 
     from PIL import Image
-    image = Image.open(r"C:\Users\79217\PycharmProjects\mypythonProject\horn_ant.png")
+    image = Image.open("horn_ant.png")
 
     col1.subheader('%s' % lang_switcher[i][3])
     col1.image(image, width=350)
