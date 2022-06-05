@@ -141,10 +141,10 @@ lang_switcher = [["Выберите тип антенны:",
                   'Radiation pattern for dipole antenna',
                   'Enter parameter "w" and wave length "wl" in meters:',
                   'Radiation pattern for patch antenna',
-                  'Width of radiation pattern at zero level H',
-                  'Width of radiation pattern at zero level H',
-                  'Width of radiation pattern at zero level F',
-                  'Width of radiation pattern at zero level F',]]
+                  'Zero beamwidth H',
+                  'Half power beamwidth H',
+                  'Zero beamwidth F',
+                  'Half power beamwidth F']]
 #ДОПИСАТЬ АНГЛИЙСКИЕ НАЗВАНИЯ ШИРИНЫ ДИАГРАММ 
 i = 0
 if ln_type == 'Русский':
