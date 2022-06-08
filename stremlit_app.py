@@ -4,6 +4,7 @@ import sympy as sym
 import matplotlib.pyplot as plt
 c = 299792458
 
+
 def hornPlot_and_D(a, b, frc):
     frc = frc * 10 ** 6
     c = 299792458
@@ -32,14 +33,18 @@ def hornPlot_and_D(a, b, frc):
     De = 32 * a * b1 / np.pi / l / l
     return De
 
-def hornWidthH(frc,a):
-    l = c / frc
-    return [172*l/a,67*l/a]
-def hornWidthE(frc,b):
-    l = c / frc
-    return [115*l/b,51*l/b]
 
-def dipolPlot(wave_length,dipole_length):
+def hornWidthH(frc, a):
+    l = c / frc
+    return [172*l/a, 67*l/a]
+
+
+def hornWidthE(frc, b):
+    l = c / frc
+    return [115*l/b, 51*l/b]
+
+
+def dipolPlot(wave_length, dipole_length):
     theta = np.arange(np.pi / 360, 2 * np.pi, np.pi / 360)
     fig = plt.figure()
     ax = fig.add_subplot(projection='polar')
@@ -87,7 +92,7 @@ def patchPlot(parameter, wave_length):
     col2.pyplot(fig)
 
 
-def pathcDirect(parameter,wave_length):
+def pathcDirect(parameter, wave_length):
     k = 2 * np.pi / wave_length
     X = k * parameter
     x = sym.Symbol('x')
@@ -138,10 +143,10 @@ lang_switcher = [["Выберите тип антенны:",
                   'Radiation pattern for dipole antenna',
                   'Enter parameter "w" and wave length "wl" in meters:',
                   'Radiation pattern for patch antenna',
-                  'Zero beamwidth H',
-                  'Half power beamwidth H',
-                  'Zero beamwidth F',
-                  'Half power beamwidth F']]
+                  'Zero beamwidth H is equal   ',
+                  'Half power beamwidth H is equal   ',
+                  'Zero beamwidth F is equal   ',
+                  'Half power beamwidth F is equal   ']]
 #ДОПИСАТЬ АНГЛИЙСКИЕ НАЗВАНИЯ ШИРИНЫ ДИАГРАММ 
 i = 0
 if ln_type == 'Русский':
@@ -156,9 +161,9 @@ col1, col2 = st.columns(2)
 if an_type == 'Рупорная антенна' or an_type == 'Horn':
 
     col1.subheader("%s" % lang_switcher[i][2])
-    a = col1.number_input('a, m', 0.0, None,1.0)
-    b = col1.number_input('b, m', 0.0, None,1.0)
-    frc = col1.number_input('frc, MHz', 0.0, None,1000.0)
+    a = col1.number_input('a, m', 0.0, None, 1.0)
+    b = col1.number_input('b, m', 0.0, None, 1.0)
+    frc = col1.number_input('frc, MHz', 0.0, None, 1000.0)
 
     from PIL import Image
     image = Image.open("horn_ant.png")
@@ -166,14 +171,13 @@ if an_type == 'Рупорная антенна' or an_type == 'Horn':
     col1.subheader('%s' % lang_switcher[i][3])
     col1.image(image, width=350)
 
-    b1 = col1.number_input('b1, m', 0.0, None,1.0)
-
+    b1 = col1.number_input('b1, m', 0.0, None, 1.0)
 
     if col1.button('%s' % lang_switcher[i][4]) and a > 0 and b > 0 and frc > 0:
 
         De = str(hornPlot_and_D(a, b, frc))
         col2.subheader('%s' % lang_switcher[i][8] + De)
-        WH=hornWidthH(frc,a)
+        WH = hornWidthH(frc, a)
         col2.subheader('%s' % lang_switcher[i][14] + str(WH[0]))
         col2.subheader('%s' % lang_switcher[i][15] + str(WH[1]))
         WE = hornWidthE(frc, b)
@@ -187,8 +191,8 @@ if an_type == 'Рупорная антенна' or an_type == 'Horn':
 elif an_type == 'Дипольная антенна' or an_type == 'Dipole':
 
     col1.subheader('%s' % lang_switcher[i][10])
-    dipole_length = col1.number_input('l, m', 0.0, None,1.0)
-    wave_length = col1.number_input('wl, m', 0.0, None,1.0)
+    dipole_length = col1.number_input('l, m', 0.0, None, 1.0)
+    wave_length = col1.number_input('wl, m', 0.0, None, 1.0)
 
     if col1.button('%s' % lang_switcher[i][4]) and dipole_length > 0 and wave_length > 0:
 
