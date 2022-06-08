@@ -2,7 +2,7 @@ import streamlit as st
 import numpy as np
 import sympy as sym
 import matplotlib.pyplot as plt
-
+c = 299792458
 
 def hornPlot_and_D(a, b, frc):
     frc = frc * 10 ** 6
@@ -32,6 +32,12 @@ def hornPlot_and_D(a, b, frc):
     De = 32 * a * b1 / np.pi / l / l
     return De
 
+def hornWidthH(frc,a):
+    l = c / frc
+    return [172*l/a,67*l/a]
+def hornWidthE(frc,b):
+    l = c / frc
+    return [115*l/b,51*l/b]
 
 def dipolPlot(wave_length,dipole_length):
     theta = np.arange(np.pi / 360, 2 * np.pi, np.pi / 360)
@@ -45,7 +51,7 @@ def dipolPlot(wave_length,dipole_length):
 
     ax.plot(theta, dipole_diagram)
     ax.set_theta_zero_location('N')
-    ax.set_rlabel_position(-90)
+    ax.set_rlabel_position(-120)
     plt.thetagrids(range(0, 360, 30))
     ax.set_xlabel('Theta, degrees')
     ax.set_title('%s' % lang_switcher[i][11], loc='center')
@@ -76,6 +82,7 @@ def patchPlot(parameter, wave_length):
     norm = f.max()
     patch_diagram = 20 * np.log10(f / norm)
     ax.plot(theta, patch_diagram)
+    ax.set_rlabel_position(-45)
     ax.set_title('%s' % lang_switcher[i][13], loc='center')
     col2.pyplot(fig)
 
@@ -108,26 +115,34 @@ lang_switcher = [["Выберите тип антенны:",
                   'H-плоскость',
                   'Диаграмма направленности для рупорной антенны',
                   "Направленность антенны равна ",
-                  'Неверно введены данные! Пожалуйста, убедитесь, что a > 0, b > 0 и frc > 0 и постройте диаграмму еще раз.',
+                  'Неверно введены данные! Пожалуйста, убедитесь, что введенные величины положительные и постройте диаграмму еще раз.',
                   'Введите длину диполя "l" в метрах и длину волны "wl" в метрах:',
                   'Диаграмма направленности для дипольной антенны',
                   'Введите параметр "w" и длину волны "wl" в метрах:',
-                  'Диаграмма направленности для патч-антенны'],
+                  'Диаграмма направленности для патч-антенны',
+                  'Ширина диаграммы направленности нулевого уровня H:   ',
+                  'Ширина диаграммы направленности по уровню половинной мощности H:  ',
+                  'Ширина диаграммы направленности нулевого уровня F:   ',
+                  'Ширина диаграммы направленности по уровню половинной мощности F:   '],
                  ["Choose your antenna type:",
                   ['Horn', 'Dipole', 'Patch'],
                   'Enter antenna width "a" in meters, antenna height "b" in meters and wave frequency "frc" in megahertz:',
-                  'Enter antenna horn height "b1" in meters:',
+                  'Enter antenna waveguide height "b1" in meters:',
                   'Calculate radiation pattern',
                   'E-plane',
                   'H-plane',
                   'Radiation pattern for horn antenna',
                   "Antenna directivity is equal ",
-                  'Incorrect data entered! Please, make sure that a > 0, b > 0 and frc > 0 and restart calculation.',
+                  'Incorrect data entered! Please, make sure that all the input parameters are positive and restart calculation.',
                   'Enter dipole length "l" in meters and wave length "wl" in meters:',
                   'Radiation pattern for dipole antenna',
                   'Enter parameter "w" and wave length "wl" in meters:',
-                  'Radiation pattern for patch antenna']]
-
+                  'Radiation pattern for patch antenna',
+                  'Zero beamwidth H',
+                  'Half power beamwidth H',
+                  'Zero beamwidth F',
+                  'Half power beamwidth F']]
+#ДОПИСАТЬ АНГЛИЙСКИЕ НАЗВАНИЯ ШИРИНЫ ДИАГРАММ 
 i = 0
 if ln_type == 'Русский':
     i = 0
@@ -141,9 +156,9 @@ col1, col2 = st.columns(2)
 if an_type == 'Рупорная антенна' or an_type == 'Horn':
 
     col1.subheader("%s" % lang_switcher[i][2])
-    a = col1.number_input('a, m', 0.0, None)
-    b = col1.number_input('b, m', 0.0, None)
-    frc = col1.number_input('frc, MHz', 0.0, None)
+    a = col1.number_input('a, m', 0.0, None,1.0)
+    b = col1.number_input('b, m', 0.0, None,1.0)
+    frc = col1.number_input('frc, MHz', 0.0, None,1000.0)
 
     from PIL import Image
     image = Image.open("horn_ant.png")
@@ -151,13 +166,19 @@ if an_type == 'Рупорная антенна' or an_type == 'Horn':
     col1.subheader('%s' % lang_switcher[i][3])
     col1.image(image, width=350)
 
-    b1 = col1.number_input('b1, m', 0.0, None)
+    b1 = col1.number_input('b1, m', 0.0, None,1.0)
 
 
     if col1.button('%s' % lang_switcher[i][4]) and a > 0 and b > 0 and frc > 0:
 
         De = str(hornPlot_and_D(a, b, frc))
         col2.subheader('%s' % lang_switcher[i][8] + De)
+        WH=hornWidthH(frc,a)
+        col2.subheader('%s' % lang_switcher[i][14] + str(WH[0]))
+        col2.subheader('%s' % lang_switcher[i][15] + str(WH[1]))
+        WE = hornWidthE(frc, b)
+        col2.subheader('%s' % lang_switcher[i][16] + str(WE[0]))
+        col2.subheader('%s' % lang_switcher[i][17] + str(WE[1]))
 
     else:
         st.warning('%s' % lang_switcher[i][9])
@@ -166,8 +187,8 @@ if an_type == 'Рупорная антенна' or an_type == 'Horn':
 elif an_type == 'Дипольная антенна' or an_type == 'Dipole':
 
     col1.subheader('%s' % lang_switcher[i][10])
-    dipole_length = col1.number_input('l, m', 0.0, None)
-    wave_length = col1.number_input('wl, m', 0.0, None)
+    dipole_length = col1.number_input('l, m', 0.0, None,1.0)
+    wave_length = col1.number_input('wl, m', 0.0, None,1.0)
 
     if col1.button('%s' % lang_switcher[i][4]) and dipole_length > 0 and wave_length > 0:
 
@@ -180,7 +201,7 @@ elif an_type == 'Дипольная антенна' or an_type == 'Dipole':
 
 elif an_type == 'Патч-антенна' or an_type == 'Patch':
 
-    col1.write('Введите параметр "w" и длину волны "wl" в метрах:')
+    col1.write(lang_switcher[i][11])
     parameter = col1.number_input('w, m', 0.0, None, 1.0)
     wave_length = col1.number_input('wl, m', 0.0, None, 1.0)
     if col1.button('%s' % lang_switcher[i][4]) and wave_length > 0:
