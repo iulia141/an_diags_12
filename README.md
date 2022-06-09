@@ -9,11 +9,11 @@
 
 
 Весь код обернут в оболочку Streamlit для работы с приложением через сайт. Однако можно запустить код и локально, для чего нужно установить библиотеку streamlit:
-    'pip install streamlit'
+    `pip install streamlit`
 а также другие необходимые для работы программы библиотеки:
-    'pip install -r requirements.txt'
+    `pip install -r requirements.txt`
 после чего вызвать в терминале
-    'streamlit run stremlit_app.py'
+    `streamlit run stremlit_app.py`
 Есть возможность выбрать один из двух языков: английский или русский
 
 ### Работа выполнена...
