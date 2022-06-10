@@ -137,16 +137,16 @@ lang_switcher = [["Выберите тип антенны:",
                   'E-plane',
                   'H-plane',
                   'Radiation pattern for horn antenna',
-                  "Antenna directivity is equal ",
+                  "Antenna directivity equals ",
                   'Incorrect data entered! Please, make sure that all the input parameters are positive and restart calculation.',
                   'Enter dipole length "l" in meters and wave length "wl" in meters:',
                   'Radiation pattern for dipole antenna',
                   'Enter parameter "w" and wave length "wl" in meters:',
                   'Radiation pattern for patch antenna',
-                  'Zero beamwidth H is equal   ',
-                  'Half power beamwidth H is equal   ',
-                  'Zero beamwidth F is equal   ',
-                  'Half power beamwidth F is equal   ']]
+                  'Zero beamwidth H equals   ',
+                  'Half power beamwidth H equals   ',
+                  'Zero beamwidth F equals       ',
+                  'Half power beamwidth F equals   ']]
 #ДОПИСАТЬ АНГЛИЙСКИЕ НАЗВАНИЯ ШИРИНЫ ДИАГРАММ 
 i = 0
 if ln_type == 'Русский':
